@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <h1>Page with Posts</h1>
+    <my-button @click="fetchPosts" style="margin: 15px;">Get Post</my-button>
     <input type="text" v-model.trim.number="modificatorValue"></input>
     <my-button @click="showDialog" style="margin: 15px;">Add New Post</my-button>
     <my-dialog v-model:show="dialogVisibile">
@@ -20,17 +21,14 @@
 <script>
 import PostForm from '@/components/PostForm'
 import PostList from '@/components/PostList'
+import axios from 'axios'
 export default {
   components: {
     PostForm, PostList
   },  
   data(){
     return {
-      posts: [
-        {id: 1, title: 'Title 1',  body: 'body 1'},
-        {id: 2, title: 'Title 2',  body: 'body 2'},
-        {id: 3, title: 'Title 3',  body: 'body 3'},
-      ],
+      posts: [],
     dialogVisibile: false,
     modificatorValue: '',
     }
@@ -46,8 +44,16 @@ export default {
     },
     showDialog(){
       this.dialogVisibile = true
-    }
+    },
 
+    async fetchPosts(){
+      try{
+        const resp = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        this.posts = resp.data
+      }catch(e){
+        alert('Error: ', e)
+      }
+    }
   }
 }
 </script>
