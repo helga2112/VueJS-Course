@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <h1>Page with Posts</h1>
+    <input type="text" v-model.trim.number="modificatorValue"></input>
     <my-button @click="showDialog" style="margin: 15px;">Add New Post</my-button>
     <my-dialog v-model:show="dialogVisibile">
       <post-form @create="createPost"/>
@@ -30,7 +31,8 @@ export default {
         {id: 2, title: 'Title 2',  body: 'body 2'},
         {id: 3, title: 'Title 3',  body: 'body 3'},
       ],
-    dialogVisibile: false
+    dialogVisibile: false,
+    modificatorValue: '',
     }
 
   },
