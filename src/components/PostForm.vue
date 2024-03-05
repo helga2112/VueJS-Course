@@ -13,7 +13,7 @@
         />
         <my-button 
           @click="createPost"
-          style="align-self: flex-end;">
+          style="align-self: flex-end; margin: 15px;">
           Add new Post
         </my-button>
     </form>
